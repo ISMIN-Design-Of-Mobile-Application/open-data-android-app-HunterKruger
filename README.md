@@ -2,8 +2,8 @@
 ## [APP NAME]  
   
 Codé par :   
- - [prenom1] [nom1]   
- - [prenom2] [nom2]   
+ - [Yuan] [FENG]   
+ - [Omar] [KHATIB]   
 
 ## Description  
   
