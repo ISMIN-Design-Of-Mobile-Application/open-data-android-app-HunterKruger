@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity(){
         setContentView(R.layout.activity_main)
 
         val list   = findViewById<Button>(R.id.list)
-        val map    = findViewById<Button>(R.id.map)
+        val map    = findViewById<Button>(R.id.MAPS)
         val prefer = findViewById<Button>(R.id.preference)
         val info   = findViewById<Button>(R.id.information)
 
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(){
             ShowFragmentOne()
         }
         map.setOnClickListener(){
-            ShowFragmentTwo()
+            ShowFragmentMapTwo()
         }
         prefer.setOnClickListener(){
             ShowFragmentThree()
@@ -39,9 +39,9 @@ class MainActivity : AppCompatActivity(){
         transaction.addToBackStack(null)
         transaction.commit()
     }
-    fun ShowFragmentTwo(){
+    fun ShowFragmentMapTwo(){
         val transaction = manager.beginTransaction()
-        val frag = FragmentTwo()
+        val frag = FragmentMapTwo()
         transaction.replace(R.id.a_main, frag) //replace the using one when you want to use another
         transaction.addToBackStack(null)
         transaction.commit()

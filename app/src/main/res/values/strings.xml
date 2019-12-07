@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OpenDataApp</string>
+    <string name="title_activity_fragment_map_two">Map</string>
 </resources>

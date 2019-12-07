@@ -1,7 +1,7 @@
 package com.ismin.opendataapp
 
 import android.content.Context
-
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 
@@ -9,15 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
-class FragmentTwo : Fragment(){
+class FragmentMapTwo : Fragment(), OnMapReadyCallback {
 
     val TAG = "FragmentTwo"
     lateinit var mapFragment: SupportMapFragment
-    lateinit var googleMap: GoogleMap
+    private lateinit var mMap: GoogleMap
 
     override fun onAttach(context: Context) {
         Log.d(TAG, "onAttach") //fot recording each change of fragment by showing the msg
@@ -35,7 +38,7 @@ class FragmentTwo : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         Log.d(TAG, "onCreateView")
-        return inflater.inflate(R.layout.fragment_two, container,false) //inflate the layout
+        return inflater.inflate(R.layout.activity_fragment_map_two, container,false) //inflate the layout
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -46,9 +49,7 @@ class FragmentTwo : Fragment(){
     override fun onStart() {
         Log.d(TAG, "onStart")
         mapFragment = childFragmentManager.findFragmentById(R.id.MAPS) as SupportMapFragment
-        mapFragment.getMapAsync(OnMapReadyCallback {
-            googleMap = it
-        }) //I don't understand why we need to put the MapReady in the onStart
+        mapFragment.getMapAsync(this)
         super.onStart()
     }
 
@@ -80,5 +81,22 @@ class FragmentTwo : Fragment(){
     override fun onDetach() {
         Log.d(TAG, "onDetach")
         super.onDetach()
+    }
+    /**
+     * Manipulates the map once available.
+     * This callback is triggered when the map is ready to be used.
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,
+     * we just add a marker near Sydney, Australia.
+     * If Google Play services is not installed on the device, the user will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * installed Google Play services and returned to the app.
+     */
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        // Add a marker in Sydney and move the camera
+        val sydney = LatLng(-34.0, 151.0)
+        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 }
