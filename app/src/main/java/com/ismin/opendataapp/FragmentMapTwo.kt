@@ -93,10 +93,18 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        // Add a marker  and move the camera
+        var latLng = LatLng(47.0, 2.5)
+        val latLng2 = LatLng(37.0, 2.4)
+        val LatLngList : ArrayList<LatLng> = ArrayList()
+        LatLngList.add(latLng)
+        LatLngList.add(latLng2)
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        for (index in 1..LatLngList.size){
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLngList.get(index-1)))
+            mMap.addMarker(MarkerOptions().position(LatLngList.get(index-1)).title("Marker"))
+        }
     }
+    
 }
