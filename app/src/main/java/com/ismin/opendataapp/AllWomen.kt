@@ -3,6 +3,8 @@ package com.ismin.opendataapp
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import java.io.*
+import android.util.Log
+
 
 class AllWomen {
 
@@ -10,7 +12,9 @@ class AllWomen {
         val gson = GsonBuilder().setPrettyPrinting().create()
         val jsonList: String = File(dir).readText(Charsets.UTF_8)
         womenList = gson.fromJson(jsonList, object : TypeToken<List<Women>>() {}.type)
-        womenList.forEach { println(it) }
+
+        //womenList.forEach { println(it) }
+
     }
 
     var womenList: MutableList<Women> = mutableListOf()
@@ -19,6 +23,8 @@ class AllWomen {
 //    val likeFemmeList: MutableList<Femme> = mutableListOf()
 
     fun loadList() {
+//         val path  = "C:\\workspaceXY\\open-data-android-app-HunterKruger\\app\\src\\main\\java\\Asset\\femmes-illustres-a-paris-portraits.json"
+//         readLocalJson(path)
         readLocalJson("/Users/FY/Desktop/workspaceMac/open-data-android-app-HunterKruger/app/src/main/java/com/ismin/opendataapp/femmes-illustres-a-paris-portraits.json")
     }
 
@@ -96,6 +102,7 @@ class AllWomen {
 
 
 }
+
 
 fun main(args: Array<String>) {
 

@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity(){
         val prefer = findViewById<Button>(R.id.preference)
         val info   = findViewById<Button>(R.id.information)
 
+
         list.setOnClickListener(){
             ShowFragmentOne()
         }
