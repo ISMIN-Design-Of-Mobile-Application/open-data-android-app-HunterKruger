@@ -5,12 +5,16 @@ import com.google.gson.reflect.TypeToken
 import java.io.*
 import android.util.Log
 
+
 class AllWomen {
 
     fun readLocalJson(dir: String) {
         val gson = GsonBuilder().setPrettyPrinting().create()
         val jsonList: String = File(dir).readText(Charsets.UTF_8)
         womenList = gson.fromJson(jsonList, object : TypeToken<List<Women>>() {}.type)
+
+        //womenList.forEach { println(it) }
+
     }
 
     var womenList: MutableList<Women> = mutableListOf()
@@ -19,13 +23,9 @@ class AllWomen {
 //    val likeFemmeList: MutableList<Femme> = mutableListOf()
 
     fun loadList() {
-        val path  = "C:\\workspaceXY\\open-data-android-app-HunterKruger\\app\\src\\main\\java\\Asset\\femmes-illustres-a-paris-portraits.json"
-        readLocalJson(path)
-//        val file = File(path)
-//        if (file.exists())
-//            Log.d("qqq","aaaaaaaaaaaaaaa")
-//        else
-//            Log.d("ppp","ooooooooooooooooooooo")
+//         val path  = "C:\\workspaceXY\\open-data-android-app-HunterKruger\\app\\src\\main\\java\\Asset\\femmes-illustres-a-paris-portraits.json"
+//         readLocalJson(path)
+        readLocalJson("/Users/FY/Desktop/workspaceMac/open-data-android-app-HunterKruger/app/src/main/java/com/ismin/opendataapp/femmes-illustres-a-paris-portraits.json")
     }
 
     //add a femme to the femmeList by Femme object
@@ -103,12 +103,13 @@ class AllWomen {
 
 }
 
-//fun main(args: Array<String>) {
-//
-//    var allWomen = AllWomen()
-//    allWomen.loadList()
-//    allWomen.printOneWoman(5)
-//
-//}
+
+fun main(args: Array<String>) {
+
+    var allWomen = AllWomen()
+    allWomen.loadList()
+    allWomen.printOneWoman(1)
+
+}
 
 
