@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class ListAdapter ( //creates new items in the form of ViewHolders, populates the ViewHolders with data, and returns information about the data
-    private var femmeList: MutableList<Femme>,
+    private var womenList: MutableList<Women>,
     private val context: Context?
 ) : RecyclerView.Adapter<ListViewHolder>(){
 
     // Gets the number of femmes in the list
     override fun getItemCount(): Int {
-        return femmeList.size
+        return womenList.size
     }
 
     // Inflates the item views
@@ -24,8 +24,8 @@ class ListAdapter ( //creates new items in the form of ViewHolders, populates th
 
     // We will bind the list items to TextViews
     override fun onBindViewHolder(viewholder: ListViewHolder, position: Int) {
-        val name = this.femmeList[position].name
-        viewholder.itemID.text = name
+        val id = this.womenList[position].recordid
+        viewholder.itemID.text = id
     }
 
 }
