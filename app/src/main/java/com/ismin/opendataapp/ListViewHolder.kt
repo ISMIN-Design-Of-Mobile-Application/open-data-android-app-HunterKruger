@@ -9,6 +9,6 @@ class ListViewHolder(rootView: View) : RecyclerView.ViewHolder(rootView) { //cac
     var itemID : TextView
     //var itemLocation : (2, 2)
     init {
-        this.itemID = rootView.findViewById(R.id.textfemme) //need to change
+        this.itemID = rootView.findViewById(R.id.textwomen) //need to change
     }
 }

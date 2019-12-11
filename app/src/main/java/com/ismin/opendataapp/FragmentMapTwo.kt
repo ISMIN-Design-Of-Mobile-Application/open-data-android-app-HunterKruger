@@ -1,6 +1,7 @@
 package com.ismin.opendataapp
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -21,10 +22,12 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
     val TAG = "FragmentTwo"
     lateinit var mapFragment: SupportMapFragment
     private lateinit var mMap: GoogleMap
+    lateinit var allWomenLoaderClass : AllWomenLoader
 
     override fun onAttach(context: Context) {
         Log.d(TAG, "onAttach") //fot recording each change of fragment by showing the msg
         super.onAttach(context)
+        allWomenLoaderClass = AllWomenLoader(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,18 +96,20 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        // Add a marker  and move the camera
-        var latLng = LatLng(47.0, 2.5)
-        val latLng2 = LatLng(37.0, 2.4)
-        val LatLngList : ArrayList<LatLng> = ArrayList()
-        LatLngList.add(latLng)
-        LatLngList.add(latLng2)
+        allWomenLoaderClass.loadList()
+        val allWomenLoaderList : MutableList<Women> = allWomenLoaderClass.getTheWholeWholeList()
+        // Add women's markers and move the camera
 
-        for (index in 1..LatLngList.size){
+        for (index in 1..allWomenLoaderClass.getNumberOfFemmes()){
+            val name = allWomenLoaderList[index-1].fields.name
+            val x = allWomenLoaderList[index-1].fields.geo_point_2d[0]
+            val y = allWomenLoaderList[index-1].fields.geo_point_2d[1]
+            var latLng = LatLng(x, y)
+
             mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLngList.get(index-1)))
-            mMap.addMarker(MarkerOptions().position(LatLngList.get(index-1)).title("Marker"))
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+            mMap.addMarker(MarkerOptions().position(latLng).title(name))
         }
     }
-    
+
 }

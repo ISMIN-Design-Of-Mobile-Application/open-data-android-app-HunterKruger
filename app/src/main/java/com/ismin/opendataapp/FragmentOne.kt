@@ -14,14 +14,15 @@ class FragmentOne : Fragment(){
 
     lateinit var recyclerView: RecyclerView
     lateinit var womenadapter: ListAdapter
-    lateinit var allWomenMutableList : MutableList<Women>
+    lateinit var allWomen : MutableList<Women>
 
-    var allWomen = AllWomen()
+    lateinit var allWomenLoaderClass : AllWomenLoader
 
     val TAG = "FragmentOne"
     override fun onAttach(context: Context) {
         Log.d(TAG, "onAttach") //fot recording each change of fragment by showing the msg
         super.onAttach(context)
+        allWomenLoaderClass = AllWomenLoader(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,9 +40,9 @@ class FragmentOne : Fragment(){
         recyclerView = rootfrag.findViewById(R.id.list_weman)
 
         // specify an adapter
-        allWomen.loadList()
-        allWomenMutableList = allWomen.getTheWholeWholeList()
-        womenadapter = ListAdapter(allWomenMutableList, context)
+        allWomenLoaderClass.loadList()
+        allWomen = allWomenLoaderClass.getTheWholeWholeList()
+        womenadapter = ListAdapter(allWomen, context)
         recyclerView.adapter = womenadapter
 
 
