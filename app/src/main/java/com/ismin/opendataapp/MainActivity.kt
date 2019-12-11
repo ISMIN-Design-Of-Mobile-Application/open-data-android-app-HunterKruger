@@ -1,15 +1,26 @@
 package com.ismin.opendataapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import co.metalab.asyncawait.async
+import  com.ismin.opendataapp.webservice.RetrofitService
+import  com.ismin.opendataapp.webservice.WomanWebService
 
 
-val url="https://www.data.gouv.fr/fr/datasets/r/07a4a948-a51a-4aa4-ad20-ed4e1c83a832"
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+            // Coroutine body
+
+            val debugV = WomanWebService()
+            debugV.main2()
 
     }
+
+
+
+
 }

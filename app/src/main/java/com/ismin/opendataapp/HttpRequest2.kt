@@ -1,4 +1,6 @@
 package com.ismin.opendataapp
+import com.ismin.opendataapp.Femme
+import com.ismin.opendataapp.AllFemmes
 import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
@@ -11,6 +13,7 @@ import com.android.volley.toolbox.DiskBasedCache
 import com.android.volley.toolbox.HurlStack
 import com.android.volley.toolbox.StringRequest
 import org.json.JSONArray
+import org.json.JSONObject
 
 
 val urlApi="https://www.data.gouv.fr/fr/datasets/r/07a4a948-a51a-4aa4-ad20-ed4e1c83a832"
@@ -51,6 +54,7 @@ class HttpRequest2(context: Context) : AppCompatActivity() {
 
         Response.Listener<JSONArray>{
             //Treat data here
+            //val Woman:JSONObject=it.getJSONObject()
             Toast.makeText(this,"Getting and proceocessing data from server...",Toast.LENGTH_LONG).show()
         }
     }
