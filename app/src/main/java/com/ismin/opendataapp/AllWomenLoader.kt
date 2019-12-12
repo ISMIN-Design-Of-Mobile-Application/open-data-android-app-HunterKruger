@@ -10,8 +10,6 @@ import java.nio.charset.Charset
 
 class AllWomenLoader (private val context: Context) {
 
-class AllWomen {
-
     var womenList: MutableList<Women> = mutableListOf()
 
 //    a list storing all liked femmes

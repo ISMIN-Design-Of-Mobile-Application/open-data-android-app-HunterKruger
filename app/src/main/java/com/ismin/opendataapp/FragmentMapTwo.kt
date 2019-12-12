@@ -15,6 +15,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 class FragmentMapTwo : Fragment(), OnMapReadyCallback {
@@ -23,6 +24,7 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
     lateinit var mapFragment: SupportMapFragment
     private lateinit var mMap: GoogleMap
     lateinit var allWomenLoaderClass : AllWomenLoader
+    val test: String = "iii"
 
     override fun onAttach(context: Context) {
         Log.d(TAG, "onAttach") //fot recording each change of fragment by showing the msg
@@ -110,6 +112,25 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
             mMap.addMarker(MarkerOptions().position(latLng).title(name))
         }
+        mMap.setOnMarkerClickListener (GoogleMap.OnMarkerClickListener(){ marker ->
+            onMarkerClick(marker)
+            true
+//            if (marker.isInfoWindowShown) {
+//                marker.hideInfoWindow()
+//            } else {
+//                marker.showInfoWindow()
+//            }
+//            true
+        })
+    }
+
+    fun onMarkerClick(p0: Marker?): Boolean {
+        // Do something extra here
+        val intent = Intent(context, WomanActivity::class.java)
+        // Send the info of specifieed woman
+        intent.putExtra("signal", test)
+        startActivity(intent)
+        return true
     }
 
 }
