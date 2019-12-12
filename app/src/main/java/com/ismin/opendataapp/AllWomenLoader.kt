@@ -53,15 +53,13 @@ class AllWomenLoader (private val context: Context) {
         return womenList
     }
 
-    fun printOneWoman(index: Int) {
-        println(womenList[index].recordid)
-        println(womenList[index].fields.geo_point_2d[0])
-        println(womenList[index].fields.geo_point_2d[1])
-        println(womenList[index].fields.name)
-        println(womenList[index].fields.desc1)
-        println(womenList[index].fields.desc2)
-        println(womenList[index].fields.thumb_url)
-        println(womenList[index].fields.tab_name)
+    fun retureOneWoman(index: Int): String {
+        val str = "ID: " + womenList[index].recordid + "\nCoordinate: (" + womenList[index].fields.geo_point_2d[0] + ", " +
+        womenList[index].fields.geo_point_2d[1] + ") \nName: " + womenList[index].fields.name + "\nInfo: " +
+        womenList[index].fields.desc1 + "\n" + womenList[index].fields.desc2 + "\nThumb_url: " + womenList[index].fields.thumb_url +
+        "\nTab_name: " + womenList[index].fields.tab_name
+
+        return str
     }
 
 

@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -24,7 +25,6 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
     lateinit var mapFragment: SupportMapFragment
     private lateinit var mMap: GoogleMap
     lateinit var allWomenLoaderClass : AllWomenLoader
-    val test: String = "iii"
 
     override fun onAttach(context: Context) {
         Log.d(TAG, "onAttach") //fot recording each change of fragment by showing the msg
@@ -106,30 +106,29 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
             val name = allWomenLoaderList[index-1].fields.name
             val x = allWomenLoaderList[index-1].fields.geo_point_2d[0]
             val y = allWomenLoaderList[index-1].fields.geo_point_2d[1]
-            var latLng = LatLng(x, y)
+            val latLng = LatLng(x, y)
+            val infoStr = allWomenLoaderClass.retureOneWoman(index-1)
+            val markerOptions = MarkerOptions().position(latLng).snippet(infoStr)
 
             mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-            mMap.addMarker(MarkerOptions().position(latLng).title(name))
+            mMap.addMarker(markerOptions.title(name))
         }
         mMap.setOnMarkerClickListener (GoogleMap.OnMarkerClickListener(){ marker ->
             onMarkerClick(marker)
             true
-//            if (marker.isInfoWindowShown) {
-//                marker.hideInfoWindow()
-//            } else {
-//                marker.showInfoWindow()
-//            }
-//            true
         })
     }
 
     fun onMarkerClick(p0: Marker?): Boolean {
         // Do something extra here
         val intent = Intent(context, WomanActivity::class.java)
+
         // Send the info of specifieed woman
-        intent.putExtra("signal", test)
+        Toast.makeText(context, p0!!.title, Toast.LENGTH_SHORT).show()
+        intent.putExtra("signal", p0.snippet)
         startActivity(intent)
+
         return true
     }
 

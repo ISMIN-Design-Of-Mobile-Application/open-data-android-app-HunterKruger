@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ListAdapter ( //creates new items in the form of ViewHolders, populates the ViewHolders with data, and returns information about the data
     private var womenList: MutableList<Women>,
-    private val context: Context?
+    private val context: Context?,
+    var clickListener: OnWomanClickListener
 ) : RecyclerView.Adapter<ListViewHolder>(){
 
     // Gets the number of femmes in the list
@@ -23,8 +24,10 @@ class ListAdapter ( //creates new items in the form of ViewHolders, populates th
 
     // We will bind the list items to TextViews
     override fun onBindViewHolder(viewholder: ListViewHolder, position: Int) {
-        val id = this.womenList[position].fields.name
-        viewholder.itemID.text = id
+//        val id = this.womenList[position].fields.name
+//        viewholder.itemID.text = id
+
+        viewholder.initializeBinding(womenList.get(position), clickListener)
     }
 
 }

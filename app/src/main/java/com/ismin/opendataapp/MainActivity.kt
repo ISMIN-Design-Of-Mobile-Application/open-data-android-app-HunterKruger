@@ -3,13 +3,19 @@ package com.ismin.opendataapp
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.ismin.opendataapp.webservice.WomanWebService
 
 
 class MainActivity : AppCompatActivity(){
 
+
     val manager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+//        val  requete= WomanWebService()
+//        val variables = requete.getAllWomen()
+//        println("json live data object="+variables)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

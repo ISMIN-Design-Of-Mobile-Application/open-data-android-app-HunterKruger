@@ -1,18 +1,22 @@
 package com.ismin.opendataapp
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.text.FieldPosition
 
 
-class FragmentOne : Fragment() {
+class FragmentOne : Fragment(), OnWomanClickListener {
 
     lateinit var recyclerView: RecyclerView
     lateinit var womenadapter: ListAdapter
@@ -58,7 +62,7 @@ class FragmentOne : Fragment() {
         // specify an adapter
         allWomenLoaderClass.loadList()
         allWomen = allWomenLoaderClass.getTheWholeWholeList()
-        womenadapter = ListAdapter(allWomen, context)
+        womenadapter = ListAdapter(allWomen, context, this)
         recyclerView.adapter = womenadapter
 
 
@@ -110,5 +114,17 @@ class FragmentOne : Fragment() {
     override fun onDetach() {
         Log.d(TAG, "onDetach")
         super.onDetach()
+    }
+
+    override fun onWomanClick(woman: Women, position: Int) {
+        Toast.makeText(context, woman.fields.name, Toast.LENGTH_SHORT).show()
+
+        val intent = Intent(context, WomanActivity::class.java)
+        val str = "ID: " + woman.recordid + "\nCoordinate: (" + woman.fields.geo_point_2d[0] + ", " +
+                woman.fields.geo_point_2d[1] + ") \nName: " + woman.fields.name + "\nInfo: " +
+                woman.fields.desc1 + "\n" + woman.fields.desc2 + "\nThumb_url: " + woman.fields.thumb_url +
+                "\nTab_name: " + woman.fields.tab_name
+        intent.putExtra("signal", str)
+        startActivity(intent)
     }
 }
