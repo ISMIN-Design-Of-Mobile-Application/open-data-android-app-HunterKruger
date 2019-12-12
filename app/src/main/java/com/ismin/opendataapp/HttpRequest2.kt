@@ -1,6 +1,5 @@
 package com.ismin.opendataapp
-import com.ismin.opendataapp.Femme
-import com.ismin.opendataapp.AllFemmes
+import com.ismin.opendataapp.Women
 import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
