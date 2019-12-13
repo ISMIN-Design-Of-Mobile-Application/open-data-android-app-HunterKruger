@@ -7,9 +7,14 @@ Codé par :
 
 ## Description  
   
-URL des données : [URL]  
+URL des données : https://opendata.paris.fr/explore/dataset/femmes-illustres-a-paris-portraits/export/?format=geojson&timezone=Europe%2FBerlin&disjunctive.name&disjunctive.tab_name&disjunctive.short_desc
   
-[A completer]  
+Du jardin Nelson Mandela au Parc des Princes – découvrez Paris à travers ses portraits de femmes illustres.
+
+A l’occasion de la coupe féminine du monde de la FIFA 2019, partez sur les traces des parisiennes illustres à travers les lieux emblématiques de leurs vies. 
+Ce jeu de données correspond au contenu de la Web application Paris.fr elle même intégrée au site Parisinfo.com Site officiel de l'Office du Tourisme et des Congrès
+
+Ce jeu de données est mettre en relation avec celui des : Femmes illustres à Paris - Parcours
   
 ## Librairies externes  
   
