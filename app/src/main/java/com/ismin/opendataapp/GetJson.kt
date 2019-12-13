@@ -1,6 +1,13 @@
 package com.ismin.opendataapp
 
 
+data class Man(
+    val id: String,
+    val x: Float,
+    val y: Float,
+    val detail: String
+)
+
 data class Women(
     val datasetid: String,
     val fields: Fields,
