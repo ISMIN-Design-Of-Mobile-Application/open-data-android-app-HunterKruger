@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
-class FragmentFour : Fragment(){
+class FragmentFour : Fragment() {
 
     val TAG = "FragmentOne"
     override fun onAttach(context: Context) {
@@ -27,7 +27,7 @@ class FragmentFour : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         Log.d(TAG, "onCreateView")
-        return inflater.inflate(R.layout.fragment_four, container,false) //inflate the layout
+        return inflater.inflate(R.layout.fragment_four, container, false) //inflate the layout
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

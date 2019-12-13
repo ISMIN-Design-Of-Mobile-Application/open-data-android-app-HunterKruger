@@ -8,7 +8,7 @@ import android.util.Log
 import com.google.gson.JsonDeserializationContext
 import java.nio.charset.Charset
 
-class AllWomenLoader (private val context: Context) {
+class AllWomenLoader(private val context: Context) {
 
     var womenList: MutableList<Women> = mutableListOf()
 
@@ -16,7 +16,7 @@ class AllWomenLoader (private val context: Context) {
 //    val likeFemmeList: MutableList<Femme> = mutableListOf()
 
     fun loadList() {
-        val inputStream  = context.assets.open("femmes-illustres-a-paris-portraits.json")
+        val inputStream = context.assets.open("femmes-illustres-a-paris-portraits.json")
         val size = inputStream.available()
         val buffer = ByteArray(size)
         inputStream.use { it.read(buffer) }
@@ -54,47 +54,14 @@ class AllWomenLoader (private val context: Context) {
     }
 
     fun retureOneWoman(index: Int): String {
-        val str = "ID: " + womenList[index].recordid + "\nCoordinate: (" + womenList[index].fields.geo_point_2d[0] + ", " +
-        womenList[index].fields.geo_point_2d[1] + ") \nName: " + womenList[index].fields.name + "\nInfo: " +
-        womenList[index].fields.desc1 + "\n" + womenList[index].fields.desc2 + "\nThumb_url: " + womenList[index].fields.thumb_url +
-        "\nTab_name: " + womenList[index].fields.tab_name
+        val str =
+            "ID: " + womenList[index].recordid + "\nCoordinate: (" + womenList[index].fields.geo_point_2d[0] + ", " +
+                    womenList[index].fields.geo_point_2d[1] + ") \nName: " + womenList[index].fields.name + "\nInfo: " +
+                    womenList[index].fields.desc1 + "\n" + womenList[index].fields.desc2 + "\nThumb_url: " + womenList[index].fields.thumb_url +
+                    "\nTab_name: " + womenList[index].fields.tab_name
 
         return str
     }
-
-
-//    // add a Femme to the likeFemmeList
-//    fun addLikeFemme(femme: Femme) {
-//        likeFemmeList.add(femme)
-//    }
-//
-//    //get a femme from femmeList by using recordid
-//    fun getLikedFemme(recordid: Int): Femme? {
-//        val storedFemme = likeFemmeList.find { femme: Femme -> femme.recordid.equals(recordid) }
-//        return storedFemme
-//    }
-//
-//    // delete a Femme from the likeFemmeList
-//    fun deleteLikeFemme(femme: Femme) {
-//        likeFemmeList.remove(femme)
-//    }
-//
-//    //return the number of Femmes in the femmeList
-//    fun getNumberOfLikeFemmes(): Int {
-//        val numOfLikeFemmes: Int = likeFemmeList.count()
-//        return numOfLikeFemmes
-//    }
-//
-//    //delete all femmes in the likeFemmeList
-//    fun deleteAllinLikeFemmeList() {
-//        likeFemmeList.clear()
-//    }
-//
-//    //get the list "likeFemmeList"
-//    fun getTheWholeLikeFemmeList(): MutableList<Femme> {
-//        return likeFemmeList
-//    }
-
 
 }
 

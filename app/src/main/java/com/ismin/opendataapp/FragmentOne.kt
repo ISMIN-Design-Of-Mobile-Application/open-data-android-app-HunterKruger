@@ -20,9 +20,9 @@ class FragmentOne : Fragment(), OnWomanClickListener {
 
     lateinit var recyclerView: RecyclerView
     lateinit var womenadapter: ListAdapter
-    lateinit var allWomen : MutableList<Women>
+    lateinit var allWomen: MutableList<Women>
 
-    lateinit var allWomenLoaderClass : AllWomenLoader
+    lateinit var allWomenLoaderClass: AllWomenLoader
 
     val TAG = "FragmentOne"
     override fun onAttach(context: Context) {
@@ -56,7 +56,8 @@ class FragmentOne : Fragment(), OnWomanClickListener {
     ): View? {
         Log.d(TAG, "onCreateView")
 
-        val rootfrag = inflater.inflate(R.layout.fragment_one, container,false) //inflate the layout
+        val rootfrag =
+            inflater.inflate(R.layout.fragment_one, container, false) //inflate the layout
         recyclerView = rootfrag.findViewById(R.id.list_weman)
 
         // specify an adapter
@@ -67,7 +68,7 @@ class FragmentOne : Fragment(), OnWomanClickListener {
 
 
         // use a linear layout manager
-        val layoutManager =LinearLayoutManager(activity)
+        val layoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = layoutManager
 
         return rootfrag
@@ -120,10 +121,17 @@ class FragmentOne : Fragment(), OnWomanClickListener {
         Toast.makeText(context, woman.fields.name, Toast.LENGTH_SHORT).show()
 
         val intent = Intent(context, WomanActivity::class.java)
-        val str = "ID: " + woman.recordid + "\nCoordinate: (" + woman.fields.geo_point_2d[0] + ", " +
-                woman.fields.geo_point_2d[1] + ") \nName: " + woman.fields.name + "\nInfo: " +
-                woman.fields.desc1 + "\n" + woman.fields.desc2 + "\nThumb_url: " + woman.fields.thumb_url +
-                "\nTab_name: " + woman.fields.tab_name
+//        val str =
+//            "ID: " + woman.recordid + "\nCoordinate: (" + woman.fields.geo_point_2d[0] + ", " +
+//                    woman.fields.geo_point_2d[1] + ") \nName: " + woman.fields.name + "\nInfo: " +
+//                    woman.fields.desc1 + "\n" + woman.fields.desc2 + "\nThumb_url: " + woman.fields.thumb_url +
+//                    "\nTab_name: " + woman.fields.tab_name
+
+        val str =
+            "Name: " + woman.fields.name + "\n" +
+            "Address: " + woman.fields.short_desc + "\n" +
+            "Description: " + "\n" + woman.fields.desc1 + woman.fields.desc2
+
         intent.putExtra("signal", str)
         startActivity(intent)
     }

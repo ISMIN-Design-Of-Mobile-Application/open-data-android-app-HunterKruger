@@ -24,7 +24,7 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
     val TAG = "FragmentTwo"
     lateinit var mapFragment: SupportMapFragment
     private lateinit var mMap: GoogleMap
-    lateinit var allWomenLoaderClass : AllWomenLoader
+    lateinit var allWomenLoaderClass: AllWomenLoader
 
     override fun onAttach(context: Context) {
         Log.d(TAG, "onAttach") //fot recording each change of fragment by showing the msg
@@ -43,7 +43,11 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         Log.d(TAG, "onCreateView")
-        return inflater.inflate(R.layout.activity_fragment_map_two, container,false) //inflate the layout
+        return inflater.inflate(
+            R.layout.activity_fragment_map_two,
+            container,
+            false
+        ) //inflate the layout
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -87,6 +91,7 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
         Log.d(TAG, "onDetach")
         super.onDetach()
     }
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -99,22 +104,22 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         allWomenLoaderClass.loadList()
-        val allWomenLoaderList : MutableList<Women> = allWomenLoaderClass.getTheWholeWholeList()
+        val allWomenLoaderList: MutableList<Women> = allWomenLoaderClass.getTheWholeWholeList()
         // Add women's markers and move the camera
 
-        for (index in 1..allWomenLoaderClass.getNumberOfFemmes()){
-            val name = allWomenLoaderList[index-1].fields.name
-            val x = allWomenLoaderList[index-1].fields.geo_point_2d[0]
-            val y = allWomenLoaderList[index-1].fields.geo_point_2d[1]
+        for (index in 1..allWomenLoaderClass.getNumberOfFemmes()) {
+            val name = allWomenLoaderList[index - 1].fields.name
+            val x = allWomenLoaderList[index - 1].fields.geo_point_2d[0]
+            val y = allWomenLoaderList[index - 1].fields.geo_point_2d[1]
             val latLng = LatLng(x, y)
-            val infoStr = allWomenLoaderClass.retureOneWoman(index-1)
+            val infoStr = allWomenLoaderClass.retureOneWoman(index - 1)
             val markerOptions = MarkerOptions().position(latLng).snippet(infoStr)
 
             mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
             mMap.addMarker(markerOptions.title(name))
         }
-        mMap.setOnMarkerClickListener (GoogleMap.OnMarkerClickListener(){ marker ->
+        mMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener() { marker ->
             onMarkerClick(marker)
             true
         })

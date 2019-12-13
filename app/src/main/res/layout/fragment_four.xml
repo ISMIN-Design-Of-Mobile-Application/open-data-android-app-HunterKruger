@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-<TextView
-    android:id="@+id/textInfo"
-    android:layout_width="wrap_content"
-    android:layout_height="607dp"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentBottom="true"
-    android:layout_marginStart="83dp"
-    android:layout_marginTop="68dp"
-    android:layout_marginEnd="53dp"
-    android:layout_marginBottom="57dp"
-    android:gravity="center_vertical"
-    android:text="Info générales sur l’application :  \n*  URL des données \n*  Explications des données affichées \n*  Librairies et licences "
-    android:textSize="24sp" />
+    <TextView
+        android:id="@+id/textInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="660dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="71dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="top|center_vertical"
+        android:text="Info générales sur l’application :  \n
+        *  URL des données: \n
+        *  Explications des données affichées \n
+        *  Librairies et licences "
+        android:textSize="18sp"
+        />
 </RelativeLayout>
