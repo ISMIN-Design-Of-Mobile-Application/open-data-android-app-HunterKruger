@@ -13,7 +13,6 @@ import retrofit2.http.Path
  interface RetrofitService {
 
     @GET(".")
-    //fun getFemme(@Path("recordid") recordid: String): Call<List<Femme>>
     fun findWomen():Call<List<Women>>
 }
 

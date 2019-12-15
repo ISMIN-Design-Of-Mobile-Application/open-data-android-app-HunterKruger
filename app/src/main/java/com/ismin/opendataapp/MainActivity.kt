@@ -16,8 +16,8 @@ class MainActivity : AppCompatActivity() {
             // Coroutine body
 
             val debugV = WomanWebService()
-            val valueWomen=debugV.main2()
-            println(valueWomen))
+            debugV.gettingDatafromServer()
+            println("bottles="+debugV.getBottles())
              println("after printing")
 
 

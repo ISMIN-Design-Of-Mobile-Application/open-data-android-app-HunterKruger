@@ -8,6 +8,6 @@ import com.ismin.opendataapp.Women
 
 interface WomenStorage {
 
-    fun getAllWomen():LiveData<ArrayList<Women>>
+    fun getAllWomen():Women
 
 }

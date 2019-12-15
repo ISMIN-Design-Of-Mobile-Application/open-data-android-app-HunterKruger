@@ -8,12 +8,12 @@ data class Women(
     @SerializedName("recordid")
     val recordid: String,
     @SerializedName("fields")
-    val fields: Fields,
+    val fields: String,
     @SerializedName("geometry")
-    val geometry: Geometry,
+    val geometry: String,
     @SerializedName("record_timestamp")
     val record_timestamp: String
-)
+):Serializable
 
 data class Fields(
     @SerializedName("desc1")
