@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:gravity="top|center_vertical"
+        android:gravity="bottom|center_vertical"
         android:text="info of each woman"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

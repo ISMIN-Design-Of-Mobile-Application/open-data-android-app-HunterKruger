@@ -54,11 +54,15 @@ class AllWomenLoader(private val context: Context) {
     }
 
     fun retureOneWoman(index: Int): String {
+//        val str =
+//            "ID: " + womenList[index].recordid + "\nCoordinate: (" + womenList[index].fields.geo_point_2d[0] + ", " +
+//                    womenList[index].fields.geo_point_2d[1] + ") \nName: " + womenList[index].fields.name + "\nInfo: " +
+//                    womenList[index].fields.desc1 + "\n" + womenList[index].fields.desc2 + "\nThumb_url: " + womenList[index].fields.thumb_url +
+//                    "\nTab_name: " + womenList[index].fields.tab_name
         val str =
-            "ID: " + womenList[index].recordid + "\nCoordinate: (" + womenList[index].fields.geo_point_2d[0] + ", " +
-                    womenList[index].fields.geo_point_2d[1] + ") \nName: " + womenList[index].fields.name + "\nInfo: " +
-                    womenList[index].fields.desc1 + "\n" + womenList[index].fields.desc2 + "\nThumb_url: " + womenList[index].fields.thumb_url +
-                    "\nTab_name: " + womenList[index].fields.tab_name
+            "Name: " + womenList[index].fields.name + "\n" +
+                    "Address: " + womenList[index].fields.short_desc + "\n" +
+                    "Description: " + "\n" + womenList[index].fields.desc1 + womenList[index].fields.desc2
 
         return str
     }
