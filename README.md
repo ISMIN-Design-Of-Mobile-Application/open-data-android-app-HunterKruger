@@ -18,7 +18,10 @@ Ce jeu de données est mettre en relation avec celui des : Femmes illustres à P
   
 ## Librairies externes  
   
-[A completer]  
+- Langage de développement : Kotlin v1.3.50 
+- Gestion des requêtes API : Retrofit 2.6.2 
+- Affichage de la carte : Play Services Maps 17.0.0 
+- Conversion entre des objets Java et JSON : gson 2.8.6 
   
 ## Consignes  
   
