@@ -19,22 +19,23 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class FragmentMapTwo : Fragment(), OnMapReadyCallback {
+class FragmentMapTwo(allWomen:AllWomenLoader) : Fragment(), OnMapReadyCallback {
 
     val TAG = "FragmentTwo"
     lateinit var mapFragment: SupportMapFragment
     private lateinit var mMap: GoogleMap
-    lateinit var allWomenLoaderClass: AllWomenLoader
-
+     var allWomenLoaderClass: AllWomenLoader=allWomen
+    val allWomenLoaderList:  ArrayList<Women> = allWomenLoaderClass.getTheWholeWholeList()
     override fun onAttach(context: Context) {
         Log.d(TAG, "onAttach") //fot recording each change of fragment by showing the msg
         super.onAttach(context)
-        allWomenLoaderClass = AllWomenLoader(context)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG, "onCreate")
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -102,9 +103,9 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     override fun onMapReady(googleMap: GoogleMap) {
+
+
         mMap = googleMap
-        allWomenLoaderClass.loadList()
-        val allWomenLoaderList: MutableList<Women> = allWomenLoaderClass.getTheWholeWholeList()
         // Add women's markers and move the camera
 
         for (index in 1..allWomenLoaderClass.getNumberOfFemmes()) {

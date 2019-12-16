@@ -6,23 +6,23 @@ import com.google.gson.reflect.TypeToken
 import java.io.*
 import android.util.Log
 import com.google.gson.JsonDeserializationContext
+import com.ismin.opendataapp.webservice.WomanWebService
 import java.nio.charset.Charset
 
-class AllWomenLoader(private val context: Context) {
+class AllWomenLoader {
 
-    var womenList: MutableList<Women> = mutableListOf()
+    var womenList:   ArrayList<Women> =ArrayList<Women>()
 
-//    a list storing all liked femmes
-//    val likeFemmeList: MutableList<Femme> = mutableListOf()
+
+    constructor (){
+        loadList()
+    }
 
     fun loadList() {
-        val inputStream = context.assets.open("femmes-illustres-a-paris-portraits.json")
-        val size = inputStream.available()
-        val buffer = ByteArray(size)
-        inputStream.use { it.read(buffer) }
-        val json = String(buffer)
-        val gson = GsonBuilder().setPrettyPrinting().create()
-        womenList = gson.fromJson(json, object : TypeToken<List<Women>>() {}.type)
+
+        val  requete= WomanWebService()
+        womenList= requete.gettingDatafromServer()
+
     }
 
     //add a femme to the femmeList by Femme object
@@ -49,7 +49,7 @@ class AllWomenLoader(private val context: Context) {
     }
 
     //get the list "womenList"
-    fun getTheWholeWholeList(): MutableList<Women> {
+    fun getTheWholeWholeList(): ArrayList<Women>{
         return womenList
     }
 

@@ -11,6 +11,8 @@ class WomanActivity : AppCompatActivity() {
         setContentView(R.layout.activity_woman)
 
         // Receive the info that comes from the FragmentMapTwo
+
+
         var sig = intent.getStringExtra("signal")
         val textID = findViewById<TextView>(R.id.textEachWoman)
         textID.text = sig

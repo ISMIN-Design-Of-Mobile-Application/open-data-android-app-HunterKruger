@@ -10,24 +10,20 @@ class MainActivity : AppCompatActivity() {
 
 
     val manager = supportFragmentManager
+    var allWomenLoaderClass: AllWomenLoader=AllWomenLoader()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-//        val  requete= WomanWebService()
-//        val variables = requete.getAllWomen()
-//        println("json live data object="+variables)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val list = findViewById<Button>(R.id.list)
         val map = findViewById<Button>(R.id.MAPS)
         val info = findViewById<Button>(R.id.information)
-
 
         list.setOnClickListener() {
             ShowFragmentOne()
         }
         map.setOnClickListener() {
+
             ShowFragmentMapTwo()
         }
 
@@ -38,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     fun ShowFragmentOne() {
         val transaction = manager.beginTransaction()
-        val frag = FragmentOne()
+        val frag = FragmentOne(allWomenLoaderClass)
         transaction.replace(R.id.a_main, frag) //replace the using one when you want to use another
         transaction.addToBackStack(null)
         transaction.commit()
@@ -46,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     fun ShowFragmentMapTwo() {
         val transaction = manager.beginTransaction()
-        val frag = FragmentMapTwo()
+        val frag = FragmentMapTwo(allWomenLoaderClass)
         transaction.replace(R.id.a_main, frag) //replace the using one when you want to use another
         transaction.addToBackStack(null)
         transaction.commit()

@@ -1,16 +1,8 @@
 package com.ismin.opendataapp.webservice
 import android.util.Log
-import androidx.lifecycle.LiveData
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import androidx.lifecycle.MutableLiveData
 import com.ismin.opendataapp.Women
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.GlobalScope
-import com.google.gson.GsonBuilder
-import com.google.gson.Gson
-import com.ismin.opendataapp.WomenStorage
-import com.ismin.opendataapp.webservice.RetrofitService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,27 +13,23 @@ internal class WomanWebService {
     private lateinit var womenWebService: RetrofitService
 
 
-    // private val liveData = MutableLiveData<ArrayList<Women>>()
-
-
-
-    fun getBottles(): ArrayList<Women>{
+    fun getWomen(): ArrayList<Women>{
 
         return women
     }
 
-    fun gettingDatafromServer() {
+    fun gettingDatafromServer():ArrayList<Women>{
 
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
             .build()
         womenWebService = retrofit.create(RetrofitService::class.java)
+        return  serverCommunication()
 
-        serverCommunication()
     }
 
-    private fun serverCommunication() {
+    private fun serverCommunication() : ArrayList<Women>{
         womenWebService.findWomen()
             .enqueue(object : Callback<List<Women>> {
                 override fun onResponse(
@@ -49,13 +37,10 @@ internal class WomanWebService {
                     response: Response<List<Women>>
                 ) {
                     val serverWomen = response.body()
-                    println( serverWomen)
                     if (serverWomen != null) {
                         women.clear()
                         women.addAll(serverWomen)
-                        Log.d("problem", "good")
-
-                        println(women)
+                        Log.d("No problems", "good")
                     }
                 }
 
@@ -63,9 +48,12 @@ internal class WomanWebService {
                     call: Call<List<Women>>,
                     t: Throwable
                 ) {
-                    Log.d("problem", "Unable to load cellar")
+                    Log.d("problem", t.toString())
                 }
+
+
             })
+        return women
 
 
     }
@@ -73,7 +61,7 @@ internal class WomanWebService {
 
     companion object {
         private const val BASE_URL =
-            "https://opendata.paris.fr/api/records/1.0/search/?dataset=femmes-illustres-a-paris-portraits&facet=name&facet=tab_name&facet=short_desc"
+            "https://opendata.paris.fr/explore/dataset/femmes-illustres-a-paris-portraits/download/?format=json&timezone=Europe/Berlin"
     }
 
 

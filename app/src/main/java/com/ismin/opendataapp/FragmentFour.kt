@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 class FragmentFour : Fragment() {
 
     val TAG = "FragmentOne"
+
+
     override fun onAttach(context: Context) {
         Log.d(TAG, "onAttach") //fot recording each change of fragment by showing the msg
         super.onAttach(context)

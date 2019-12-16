@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class ListAdapter( //creates new items in the form of ViewHolders, populates the ViewHolders with data, and returns information about the data
-    private var womenList: MutableList<Women>,
+    private var womenList: ArrayList<Women>,
     private val context: Context?,
     var clickListener: OnWomanClickListener
 ) : RecyclerView.Adapter<ListViewHolder>() {
