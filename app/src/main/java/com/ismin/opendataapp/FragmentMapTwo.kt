@@ -1,6 +1,7 @@
 package com.ismin.opendataapp
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,12 +9,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 class FragmentMapTwo : Fragment(), OnMapReadyCallback {
@@ -21,10 +24,12 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
     val TAG = "FragmentTwo"
     lateinit var mapFragment: SupportMapFragment
     private lateinit var mMap: GoogleMap
+    lateinit var allWomenLoaderClass: AllWomenLoader
 
     override fun onAttach(context: Context) {
         Log.d(TAG, "onAttach") //fot recording each change of fragment by showing the msg
         super.onAttach(context)
+        allWomenLoaderClass = AllWomenLoader(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +43,11 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         Log.d(TAG, "onCreateView")
-        return inflater.inflate(R.layout.activity_fragment_map_two, container,false) //inflate the layout
+        return inflater.inflate(
+            R.layout.activity_fragment_map_two,
+            container,
+            false
+        ) //inflate the layout
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -82,6 +91,7 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
         Log.d(TAG, "onDetach")
         super.onDetach()
     }
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -93,18 +103,38 @@ class FragmentMapTwo : Fragment(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        // Add a marker  and move the camera
-        var latLng = LatLng(47.0, 2.5)
-        val latLng2 = LatLng(37.0, 2.4)
-        val LatLngList : ArrayList<LatLng> = ArrayList()
-        LatLngList.add(latLng)
-        LatLngList.add(latLng2)
+        allWomenLoaderClass.loadList()
+        val allWomenLoaderList: MutableList<Women> = allWomenLoaderClass.getTheWholeWholeList()
+        // Add women's markers and move the camera
 
-        for (index in 1..LatLngList.size){
+        for (index in 1..allWomenLoaderClass.getNumberOfFemmes()) {
+            val name = allWomenLoaderList[index - 1].fields.name
+            val x = allWomenLoaderList[index - 1].fields.geo_point_2d[0]
+            val y = allWomenLoaderList[index - 1].fields.geo_point_2d[1]
+            val latLng = LatLng(x, y)
+            val infoStr = allWomenLoaderClass.retureOneWoman(index - 1)
+            val markerOptions = MarkerOptions().position(latLng).snippet(infoStr)
+
             mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLngList.get(index-1)))
-            mMap.addMarker(MarkerOptions().position(LatLngList.get(index-1)).title("Marker"))
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+            mMap.addMarker(markerOptions.title(name))
         }
+        mMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener() { marker ->
+            onMarkerClick(marker)
+            true
+        })
     }
-    
+
+    fun onMarkerClick(p0: Marker?): Boolean {
+        // Do something extra here
+        val intent = Intent(context, WomanActivity::class.java)
+
+        // Send the info of specifieed woman
+        Toast.makeText(context, p0!!.title, Toast.LENGTH_SHORT).show()
+        intent.putExtra("signal", p0.snippet)
+        startActivity(intent)
+
+        return true
+    }
+
 }

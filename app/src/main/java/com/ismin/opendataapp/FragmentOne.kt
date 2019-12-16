@@ -1,29 +1,34 @@
 package com.ismin.opendataapp
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.text.FieldPosition
 
 
-class FragmentOne : Fragment() {
+class FragmentOne : Fragment(), OnWomanClickListener {
 
     lateinit var recyclerView: RecyclerView
     lateinit var womenadapter: ListAdapter
-    lateinit var allWomenMutableList : MutableList<Women>
+    lateinit var allWomen: MutableList<Women>
 
-    var allWomen = AllWomen()
+    lateinit var allWomenLoaderClass: AllWomenLoader
 
     val TAG = "FragmentOne"
     override fun onAttach(context: Context) {
         Log.d(TAG, "onAttach") //for recording each change of fragment by showing the msg
         super.onAttach(context)
+        allWomenLoaderClass = AllWomenLoader(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,18 +56,19 @@ class FragmentOne : Fragment() {
     ): View? {
         Log.d(TAG, "onCreateView")
 
-        val rootfrag = inflater.inflate(R.layout.fragment_one, container,false) //inflate the layout
+        val rootfrag =
+            inflater.inflate(R.layout.fragment_one, container, false) //inflate the layout
         recyclerView = rootfrag.findViewById(R.id.list_weman)
 
         // specify an adapter
-        allWomen.loadList()
-        allWomenMutableList = allWomen.getTheWholeWholeList()
-        womenadapter = ListAdapter(allWomenMutableList, context)
+        allWomenLoaderClass.loadList()
+        allWomen = allWomenLoaderClass.getTheWholeWholeList()
+        womenadapter = ListAdapter(allWomen, context, this)
         recyclerView.adapter = womenadapter
 
 
         // use a linear layout manager
-        val layoutManager =LinearLayoutManager(activity)
+        val layoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = layoutManager
 
         return rootfrag
@@ -109,5 +115,24 @@ class FragmentOne : Fragment() {
     override fun onDetach() {
         Log.d(TAG, "onDetach")
         super.onDetach()
+    }
+
+    override fun onWomanClick(woman: Women, position: Int) {
+        Toast.makeText(context, woman.fields.name, Toast.LENGTH_SHORT).show()
+
+        val intent = Intent(context, WomanActivity::class.java)
+//        val str =
+//            "ID: " + woman.recordid + "\nCoordinate: (" + woman.fields.geo_point_2d[0] + ", " +
+//                    woman.fields.geo_point_2d[1] + ") \nName: " + woman.fields.name + "\nInfo: " +
+//                    woman.fields.desc1 + "\n" + woman.fields.desc2 + "\nThumb_url: " + woman.fields.thumb_url +
+//                    "\nTab_name: " + woman.fields.tab_name
+
+        val str =
+            "Name: " + woman.fields.name + "\n" +
+            "Address: " + woman.fields.short_desc + "\n" +
+            "Description: " + "\n" + woman.fields.desc1 + woman.fields.desc2
+
+        intent.putExtra("signal", str)
+        startActivity(intent)
     }
 }
