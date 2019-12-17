@@ -53,7 +53,7 @@ class AllWomenLoader {
         return womenList
     }
 
-    fun retureOneWoman(index: Int): String {
+    fun returnOneWoman(index: Int): String {
 //        val str =
 //            "ID: " + womenList[index].recordid + "\nCoordinate: (" + womenList[index].fields.geo_point_2d[0] + ", " +
 //                    womenList[index].fields.geo_point_2d[1] + ") \nName: " + womenList[index].fields.name + "\nInfo: " +
@@ -66,6 +66,12 @@ class AllWomenLoader {
 
         return str
     }
+
+    fun returnWomanUrl(index:Int):String{
+        val url=womenList[index].fields.thumb_url
+        return url
+    }
+
 
 }
 

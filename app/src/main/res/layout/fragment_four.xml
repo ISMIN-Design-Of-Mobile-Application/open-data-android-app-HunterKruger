@@ -27,6 +27,7 @@ A l’occasion de la coupe féminine du monde de la FIFA 2019, partez sur les tr
 - Langage de développement : Kotlin v1.3.50 \n
 - Gestion des requêtes API : Retrofit 2.6.2 \n
 - Affichage de la carte : Play Services Maps 17.0.0 \n
+- Gestion de téléchargement d'image : Glide 4.9.0 \n
 - Conversion entre des objets Java et JSON : gson 2.8.6 \n
 "
         android:textSize="16sp"
