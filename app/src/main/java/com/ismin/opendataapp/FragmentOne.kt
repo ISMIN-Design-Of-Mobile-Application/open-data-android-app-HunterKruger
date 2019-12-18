@@ -113,6 +113,13 @@ class FragmentOne(allWomen:AllWomenLoader) : Fragment(), OnWomanClickListener {
             "Description: " + "\n" + woman.fields.desc1 + woman.fields.desc2
 
         intent.putExtra("signal", str)
+
+
+
+        val imgUrl= woman.fields.thumb_url
+
+        intent.putExtra("img", imgUrl)
+
         startActivity(intent)
     }
 }
