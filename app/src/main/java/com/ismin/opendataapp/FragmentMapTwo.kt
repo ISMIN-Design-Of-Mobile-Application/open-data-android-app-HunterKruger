@@ -2,7 +2,6 @@ package com.ismin.opendataapp
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 
@@ -113,7 +112,10 @@ class FragmentMapTwo(allWomen:AllWomenLoader) : Fragment(), OnMapReadyCallback {
             val x = allWomenLoaderList[index - 1].fields.geo_point_2d[0]
             val y = allWomenLoaderList[index - 1].fields.geo_point_2d[1]
             val latLng = LatLng(x, y)
-            val infoStr = allWomenLoaderClass.retureOneWoman(index - 1)
+            val infoStr = allWomenLoaderClass.returnOneWoman(index - 1)
+
+            val infoUrl=allWomenLoaderClass.returnWomanUrl(index-1)
+
             val markerOptions = MarkerOptions().position(latLng).snippet(infoStr)
 
             mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
@@ -133,6 +135,8 @@ class FragmentMapTwo(allWomen:AllWomenLoader) : Fragment(), OnMapReadyCallback {
         // Send the info of specifieed woman
         Toast.makeText(context, p0!!.title, Toast.LENGTH_SHORT).show()
         intent.putExtra("signal", p0.snippet)
+
+
         startActivity(intent)
 
         return true
